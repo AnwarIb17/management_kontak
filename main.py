@@ -1,7 +1,37 @@
-kontak = []
+class Kontak:
+    def __init__(self):
+        self.kontak = []
+
+    def melihat_kontak(self):
+        if self.kontak:
+            for num, item in enumerate(self.kontak, start=1):
+                print(f'{num}, {item["nama"]}, {item["hp"]}, {item["email"]}')
+        else:
+            print("\nkontak masih kosong !! \n")
+            return False
+        return True
+
+    def menambah_kontak(self):
+        nama = input("masukkan nama kontak baru : ")
+        hp = input("masukkan nomor kontak baru : ")
+        email = input("masukkan email kontak baru : ")
+        kontak_baru = {'nama': nama, 'hp': hp, 'email': email}
+        self.kontak.append(kontak_baru)
+        print("\nkontak baru berhasil di tambahkan ! \n")
+
+    def menghapus_kontak(self):
+        if not self.melihat_kontak():
+            return
+        else:
+            i_hapus = int(input("\nmasukkan nomor kontak yang ingin di hapus : ")) - 1
+            del self.kontak[i_hapus]
+            print("kontak berhasil di hapus !")
 
 
-def tampilan_utama():
+kontak_kantor = Kontak()
+kontak_keluarga = Kontak()
+
+while True:
     print("-" * 35)
     print(f'{"Menu Utama":^35}')
     print("1. Menampilkan semua kontak")
@@ -9,48 +39,16 @@ def tampilan_utama():
     print("3. Menghapus kontak")
     print("4. keluar")
     print("-" * 35)
-
-
-def melihat_kontak():
-    if kontak:
-        for num, item in enumerate(kontak, start=1):
-            print(f'{num}, {item["nama"]}, {item["hp"]}, {item["email"]}')
-    else:
-        print("\nkontak masih kosong !! \n")
-        return False
-    return True
-
-
-def menambah_kontak():
-    nama = input("masukkan nama kontak baru : ")
-    hp = input("masukkan nomor kontak baru : ")
-    email = input("masukkan email kontak baru : ")
-    kontak_baru = {'nama': nama, 'hp': hp, 'email': email}
-    kontak.append(kontak_baru)
-    print("\nkontak baru berhasil di tambahkan ! \n")
-
-
-def menghapus_kontak():
-    if not melihat_kontak():
-        return
-    else:
-        i_hapus = int(input("\nmasukkan nomor kontak yang ingin di hapus : "))-1
-        del kontak[i_hapus]
-        print("kontak berhasil di hapus !")
-
-
-while True:
-    tampilan_utama()
     pilihan = input("Masukkan pilihan anda (1,2,3) : ")
 
     if pilihan == '1':
-        melihat_kontak()
+        kontak_kantor.melihat_kontak()
 
     elif pilihan == '2':
-        menambah_kontak()
+        kontak_kantor.menambah_kontak()
 
     elif pilihan == '3':
-        menghapus_kontak()
+        kontak_kantor.menghapus_kontak()
 
     elif pilihan == '4':
         break
